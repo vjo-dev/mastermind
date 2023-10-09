@@ -1,0 +1,103 @@
+[gd_scene load_steps=11 format=3 uid="uid://r4qw1bf358f5"]
+
+[ext_resource type="PackedScene" uid="uid://d3uq8bxcxsmnq" path="res://tests/drag_and_drop/drag.tscn" id="1_5gv2v"]
+[ext_resource type="Script" path="res://tests/drag_and_drop/test_drag_drop.gd" id="1_vj1sq"]
+[ext_resource type="Texture2D" uid="uid://bluxaqg6flwpr" path="res://assets/code_peg_cyan.png" id="3_e7h2a"]
+[ext_resource type="PackedScene" uid="uid://bqfa3ee28mxm1" path="res://tests/drag_and_drop/drop.tscn" id="3_fvkol"]
+[ext_resource type="Texture2D" uid="uid://bxxl31xi1wjjx" path="res://assets/code_peg_blue.png" id="3_wg6er"]
+[ext_resource type="Texture2D" uid="uid://boitnoxfojxcl" path="res://assets/code_peg_green.png" id="4_2sr1d"]
+[ext_resource type="Texture2D" uid="uid://dg6q2vvfpdoxt" path="res://assets/code_peg_pink.png" id="5_5hd01"]
+[ext_resource type="Texture2D" uid="uid://d3n0mbsaxwq4" path="res://assets/code_peg_red.png" id="6_asos4"]
+[ext_resource type="Texture2D" uid="uid://bh5kwdvtr5wl7" path="res://assets/code_peg_yellow.png" id="7_fam86"]
+[ext_resource type="Texture2D" uid="uid://dqehbw0eo375b" path="res://assets/code_peg_empty.png" id="8_bdo8v"]
+
+[node name="TestDragDrop" type="Node"]
+script = ExtResource("1_vj1sq")
+
+[node name="DropRow" type="Node" parent="."]
+
+[node name="Drop0" parent="DropRow" instance=ExtResource("3_fvkol")]
+offset_left = 69.0
+offset_top = 156.0
+offset_right = 109.0
+offset_bottom = 196.0
+texture = ExtResource("8_bdo8v")
+
+[node name="Drop1" parent="DropRow" instance=ExtResource("3_fvkol")]
+offset_left = 120.0
+offset_top = 156.0
+offset_right = 160.0
+offset_bottom = 196.0
+texture = ExtResource("8_bdo8v")
+
+[node name="Drop2" parent="DropRow" instance=ExtResource("3_fvkol")]
+offset_left = 171.0
+offset_top = 155.0
+offset_right = 211.0
+offset_bottom = 195.0
+texture = ExtResource("8_bdo8v")
+
+[node name="Drop3" parent="DropRow" instance=ExtResource("3_fvkol")]
+offset_left = 221.0
+offset_top = 154.0
+offset_right = 261.0
+offset_bottom = 194.0
+texture = ExtResource("8_bdo8v")
+
+[node name="DragRow" type="Node" parent="."]
+
+[node name="Drag0" parent="DragRow" instance=ExtResource("1_5gv2v")]
+offset_left = 29.0
+offset_top = 81.0
+offset_right = 69.0
+offset_bottom = 121.0
+texture = ExtResource("3_wg6er")
+
+[node name="Drag1" parent="DragRow" instance=ExtResource("1_5gv2v")]
+offset_left = 73.0
+offset_top = 82.0
+offset_right = 113.0
+offset_bottom = 122.0
+texture = ExtResource("3_e7h2a")
+color = 1
+
+[node name="Drag2" parent="DragRow" instance=ExtResource("1_5gv2v")]
+offset_left = 118.0
+offset_top = 82.0
+offset_right = 158.0
+offset_bottom = 122.0
+texture = ExtResource("4_2sr1d")
+color = 2
+
+[node name="Drag3" parent="DragRow" instance=ExtResource("1_5gv2v")]
+offset_left = 164.0
+offset_top = 81.0
+offset_right = 204.0
+offset_bottom = 121.0
+texture = ExtResource("5_5hd01")
+color = 3
+
+[node name="Drag4" parent="DragRow" instance=ExtResource("1_5gv2v")]
+offset_left = 208.0
+offset_top = 81.0
+offset_right = 248.0
+offset_bottom = 121.0
+texture = ExtResource("6_asos4")
+color = 4
+
+[node name="Drag5" parent="DragRow" instance=ExtResource("1_5gv2v")]
+offset_left = 251.0
+offset_top = 81.0
+offset_right = 291.0
+offset_bottom = 121.0
+texture = ExtResource("7_fam86")
+color = 5
+
+[node name="Button" type="Button" parent="."]
+offset_left = 129.0
+offset_top = 214.0
+offset_right = 184.0
+offset_bottom = 244.0
+text = "Verify"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

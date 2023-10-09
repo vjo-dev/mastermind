@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0fb74wusneeu"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_apsjx"]
+[ext_resource type="PackedScene" uid="uid://dlfe6wgbx4cig" path="res://library.tscn" id="1_kttng"]
+[ext_resource type="Texture2D" uid="uid://jmqy8ouwauk0" path="res://assets/background.png" id="2_84efh"]
+[ext_resource type="PackedScene" uid="uid://5twgc21mqk73" path="res://board.tscn" id="2_jkwru"]
+
+[node name="Main" type="Node"]
+script = ExtResource("1_apsjx")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 600.0
+offset_bottom = 900.0
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_84efh")
+
+[node name="Library" parent="." instance=ExtResource("1_kttng")]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -155.0
+offset_top = -80.0
+offset_right = 155.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Board" parent="." instance=ExtResource("2_jkwru")]

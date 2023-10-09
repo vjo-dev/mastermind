@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://d3uq8bxcxsmnq"]
+
+[ext_resource type="Script" path="res://tests/drag_and_drop/drag.gd" id="1_h2hmo"]
+
+[node name="Drag" type="TextureRect"]
+custom_minimum_size = Vector2(40, 40)
+offset_right = 40.0
+offset_bottom = 40.0
+expand_mode = 1
+script = ExtResource("1_h2hmo")
+
+[node name="DragPanel" type="Panel" parent="."]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2

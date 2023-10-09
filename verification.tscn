@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwlwcsgnd3vuf"]
+
+[ext_resource type="Texture2D" uid="uid://c17cmio0n8r2q" path="res://assets/key_peg_empty.png" id="1_rcgtc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dinr2"]
+draw_center = false
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="Verification" type="Panel"]
+custom_minimum_size = Vector2(40, 40)
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_dinr2")
+
+[node name="Verif0" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 0
+offset_left = 2.5
+offset_top = 2.5
+offset_right = 17.5
+offset_bottom = 17.5
+texture = ExtResource("1_rcgtc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Verif1" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 0
+offset_left = 22.5
+offset_top = 2.5
+offset_right = 37.5
+offset_bottom = 17.5
+texture = ExtResource("1_rcgtc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Verif2" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 0
+offset_left = 2.5
+offset_top = 22.5
+offset_right = 17.5
+offset_bottom = 37.5
+texture = ExtResource("1_rcgtc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Verif3" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(15, 15)
+layout_mode = 0
+offset_left = 22.5
+offset_top = 22.5
+offset_right = 37.5
+offset_bottom = 37.5
+texture = ExtResource("1_rcgtc")
+expand_mode = 1
+stretch_mode = 5
