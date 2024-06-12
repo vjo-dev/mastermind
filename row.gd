@@ -1,60 +1,61 @@
 extends Panel
 
-signal played
+signal to_evaluate(guess)
 
-var choices : Array
-var picked
+@export var guess_peg_scene : PackedScene
 
-
-func _ready():
-	lock_row()
-	picked = 0
-	choices = [-1, -1, -1, -1]
-	$VerifyButton.hide()
+var cols : int
+var guess : Array
+var pegs_collection := []
+@onready var picked := 0
 
 
-func lock_row():
-	$Drop0.droppable = false
-	$Drop1.droppable = false
-	$Drop2.droppable = false
-	$Drop3.droppable = false
-
-
-func unlock_row():
-	$Drop0.droppable = true
-	$Drop1.droppable = true
-	$Drop2.droppable = true
-	$Drop3.droppable = true
-
-
-func _on_drop_0_dropped(color):
-	pick_color(0, color)
-
-
-func _on_drop_1_dropped(color):
-	pick_color(1, color)
-
-
-func _on_drop_2_dropped(color):
-	pick_color(2, color)
-
-
-func _on_drop_3_dropped(color):
-	pick_color(3, color)
+func init(cols) -> void:
+	# initialize guess array
+	guess = []
+	guess.resize(cols)
+	guess.fill(0)
 	
+	var guess_peg
+	for n in cols:
+		guess_peg = guess_peg_scene.instantiate()
+		guess_peg.col_index = n
+		guess_peg.dropped.connect(update_row_value)
+		guess_peg.position.x = (guess_peg.size.x + 10) * n
+		guess_peg.position.y = 0
+		add_child(guess_peg)
+		pegs_collection.append(guess_peg)
+		
+	$VerifyButton.position = Vector2i(cols * (guess_peg.size.x + 10), 0)
+	$VerifyButton.hide()
+	
+	$Verification.position = Vector2i((cols + 1) * (guess_peg.size.x + 10), 0)
+	
+	size = Vector2i((guess_peg.size.x + 10) * (cols + 2), guess_peg.size.y)
 
-func pick_color(pos, color):
-	# Count the number of peg picked
-	if choices[pos] == -1:
+
+func update_row_value(col_index, color_id):
+	if guess[col_index] == 0:
 		picked += 1
-	# Update choices list
-	choices[pos] = color
-	# If all colors are picked, allow next step
+	guess[col_index] = color_id
 	if picked == 4:
 		$VerifyButton.show()
 
 
+func unlock():
+	for peg in pegs_collection:
+		peg.droppable = true
+
+
+func lock():
+	for peg in pegs_collection:
+		peg.droppable = false
+
+
 func _on_verify_button_pressed():
+	to_evaluate.emit(guess)
+
+
+func show_evaluation(evaluations):
 	$VerifyButton.hide()
-	print("verification")
-	played.emit(choices)
+	$Verification.show_evaluation(evaluations)

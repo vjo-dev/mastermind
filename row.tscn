@@ -1,51 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://djsi4hy68rhia"]
+[gd_scene load_steps=6 format=3 uid="uid://wu752xculqq7"]
 
-[ext_resource type="PackedScene" uid="uid://v614op3rtqa4" path="res://drop.tscn" id="1_2wekl"]
+[ext_resource type="PackedScene" uid="uid://v614op3rtqa4" path="res://guess_peg.tscn" id="1_2wekl"]
 [ext_resource type="Script" path="res://row.gd" id="1_nmcx7"]
-[ext_resource type="Texture2D" uid="uid://dqehbw0eo375b" path="res://assets/code_peg_empty.png" id="2_46vpk"]
 [ext_resource type="Texture2D" uid="uid://bcgqxi3q73rsa" path="res://assets/green_check.png" id="4_neq8r"]
 [ext_resource type="PackedScene" uid="uid://bwlwcsgnd3vuf" path="res://verification.tscn" id="5_p5lkh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kw8y7"]
 draw_center = false
 
-[node name="Row" type="Panel"]
-offset_right = 260.0
-offset_bottom = 50.0
+[node name="Row" type="Panel" groups=["rows"]]
 theme_override_styles/panel = SubResource("StyleBoxFlat_kw8y7")
 script = ExtResource("1_nmcx7")
-
-[node name="Drop0" parent="." instance=ExtResource("1_2wekl")]
-layout_mode = 0
-offset_left = 10.0
-offset_top = 10.0
-offset_right = 50.0
-offset_bottom = 50.0
-texture = ExtResource("2_46vpk")
-
-[node name="Drop1" parent="." instance=ExtResource("1_2wekl")]
-layout_mode = 0
-offset_left = 60.0
-offset_top = 10.0
-offset_right = 100.0
-offset_bottom = 50.0
-texture = ExtResource("2_46vpk")
-
-[node name="Drop2" parent="." instance=ExtResource("1_2wekl")]
-layout_mode = 0
-offset_left = 110.0
-offset_top = 10.0
-offset_right = 150.0
-offset_bottom = 50.0
-texture = ExtResource("2_46vpk")
-
-[node name="Drop3" parent="." instance=ExtResource("1_2wekl")]
-layout_mode = 0
-offset_left = 160.0
-offset_top = 10.0
-offset_right = 200.0
-offset_bottom = 50.0
-texture = ExtResource("2_46vpk")
+guess_peg_scene = ExtResource("1_2wekl")
 
 [node name="VerifyButton" type="TextureButton" parent="."]
 custom_minimum_size = Vector2(40, 40)
@@ -65,8 +31,4 @@ offset_top = 10.0
 offset_right = 300.0
 offset_bottom = 50.0
 
-[connection signal="dropped" from="Drop0" to="." method="_on_drop_0_dropped"]
-[connection signal="dropped" from="Drop1" to="." method="_on_drop_1_dropped"]
-[connection signal="dropped" from="Drop2" to="." method="_on_drop_2_dropped"]
-[connection signal="dropped" from="Drop3" to="." method="_on_drop_3_dropped"]
 [connection signal="pressed" from="VerifyButton" to="." method="_on_verify_button_pressed"]

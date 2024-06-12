@@ -1,5 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwlwcsgnd3vuf"]
+[gd_scene load_steps=4 format=3 uid="uid://bwlwcsgnd3vuf"]
 
+[ext_resource type="Script" path="res://verification.gd" id="1_a27cq"]
 [ext_resource type="Texture2D" uid="uid://c17cmio0n8r2q" path="res://assets/key_peg_empty.png" id="1_rcgtc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dinr2"]
@@ -19,6 +20,7 @@ custom_minimum_size = Vector2(40, 40)
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_dinr2")
+script = ExtResource("1_a27cq")
 
 [node name="Verif0" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(15, 15)

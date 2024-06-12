@@ -1,9 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://xn3ys30ssn74"]
+[gd_scene load_steps=2 format=3 uid="uid://xn3ys30ssn74"]
 
 [ext_resource type="Script" path="res://tests/drag_and_drop/drag.gd" id="1_h2hmo"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_duxhl"]
-draw_center = false
 
 [node name="Drag" type="TextureRect"]
 custom_minimum_size = Vector2(40, 40)
@@ -11,11 +8,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 expand_mode = 1
 script = ExtResource("1_h2hmo")
+can_drag = false
 
-[node name="DragPanel" type="Panel" parent="."]
+[node name="DragPanel" type="Panel" parent="." groups=["pegs"]]
+visible = false
 show_behind_parent = true
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_duxhl")

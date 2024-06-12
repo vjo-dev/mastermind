@@ -1,55 +1,88 @@
 extends Panel
 
+signal game_over(turn)
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+@export var row_scene: PackedScene
 
+var code : Array
+var cols : int
+var rows : int
+var turn : int
+var rows_collection := []
 
-func _on_row_0_played(choices):
-	$Row0.lock_row()
-	$Row1.unlock_row()
+func init(code_m : Array, board_cols_number : int, board_rows_number : int) -> void:
+	# init the board by creating the rows
+	code = code_m
+	cols = board_cols_number
+	rows = board_rows_number
+	rows_collection = []
+	turn = 0
 
+	var row
+	# generate the board
+	for n in range(rows):
+		# instantiate a new row
+		row = row_scene.instantiate()
+		# set row parameters
+		row.init(cols)
+		if n == 0:
+			row.unlock()
+		row.to_evaluate.connect(evaluation)
+		# position the row
+		row.position.y = (rows - 1) * (row.size.y + 10) - (row.size.y + 10) * n + 10
+		row.position.x = 10
+		# add the row to board
+		add_child(row)
+		rows_collection.append(row)
 
-func _on_row_1_played(choices):
-	$Row1.lock_row()
-	$Row2.unlock_row()
+	# size the board
+	size.x = row.size.x + 10
+	size.y = (row.size.y + 10) * rows + 10
 
-
-func _on_row_2_played(choices):
-	$Row2.lock_row()
-	$Row3.unlock_row()
-
-
-func _on_row_3_played(choices):
-	$Row3.lock_row()
-	$Row4.unlock_row()
-
-
-func _on_row_4_played(choices):
-	$Row4.lock_row()
-	$Row5.unlock_row()
-
-
-func _on_row_5_played(choices):
-	$Row5.lock_row()
-	$Row6.unlock_row()
-
-
-func _on_row_6_played(choices):
-	$Row6.lock_row()
-	$Row7.unlock_row()
-
-
-func _on_row_7_played(choices):
-	$Row7.lock_row()
-	$Row8.unlock_row()
+	# start the first row
+	rows_collection[0].unlock()
 
 
-func _on_row_8_played(choices):
-	$Row8.lock_row()
-	$Row9.unlock_row()
+func evaluation(guess):
+	# check is code is break of return an evaluation
+	## black = 2 (good color, good position)
+	## white = 1 (good color, wrong position)
+	var evaluations = []
+	var propositions = guess.duplicate(true)
+	var possibilities = code.duplicate(true)
+
+	# check for peg with right color at right position
+	for color_position in range(len(propositions)):
+		if propositions[color_position] == possibilities[color_position]:
+			evaluations.append(2)
+			possibilities[color_position] = 0
+			propositions[color_position] = 0
+
+	# ckeck for peg with the right color at wrong position
+	for color_position in range(len(propositions)):
+		var proposed_color_value = propositions[color_position]
+		if proposed_color_value > 0:
+			var position_proposed_color_value = possibilities.find(propositions[color_position])
+			if position_proposed_color_value >= 0:
+				evaluations.append(1)
+				possibilities[position_proposed_color_value] = 0
+
+	rows_collection[turn].show_evaluation(evaluations)
+	
+	# check is code is break
+	if code == guess:
+		game_over.emit(true, turn)
+		return
+	
+	# loop through next row
+	next_row()
 
 
-func _on_row_9_played(choices):
-	print("game over")
+func next_row():
+	# switch the row that can be (drag and) drop
+	rows_collection[turn].lock()
+	if turn < rows - 1:
+		rows_collection[turn + 1].unlock()
+	if turn == rows - 1:
+		game_over.emit(false, turn)
+	turn += 1

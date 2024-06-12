@@ -1,30 +1,80 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0fb74wusneeu"]
+[gd_scene load_steps=10 format=3 uid="uid://usfocqjokm4j"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_apsjx"]
-[ext_resource type="PackedScene" uid="uid://dlfe6wgbx4cig" path="res://library.tscn" id="1_kttng"]
-[ext_resource type="Texture2D" uid="uid://jmqy8ouwauk0" path="res://assets/background.png" id="2_84efh"]
-[ext_resource type="PackedScene" uid="uid://5twgc21mqk73" path="res://board.tscn" id="2_jkwru"]
+[ext_resource type="PackedScene" uid="uid://8buvf5kdq1mp" path="res://peg_library.tscn" id="2_of7c2"]
+[ext_resource type="Texture2D" uid="uid://jmqy8ouwauk0" path="res://assets/background.png" id="3_h6gal"]
+[ext_resource type="Script" path="res://board.gd" id="4_3i1dd"]
+[ext_resource type="PackedScene" uid="uid://wu752xculqq7" path="res://row.tscn" id="5_yxdht"]
+[ext_resource type="PackedScene" uid="uid://daked5t6ts87p" path="res://hud.tscn" id="6_dcdkn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8nep6"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8mcif"]
+bg_color = Color(0, 0, 0, 1)
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scicy"]
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [node name="Main" type="Node"]
 script = ExtResource("1_apsjx")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 offset_right = 600.0
 offset_bottom = 900.0
 scale = Vector2(0.8, 0.8)
-texture = ExtResource("2_84efh")
+texture = ExtResource("3_h6gal")
 
-[node name="Library" parent="." instance=ExtResource("1_kttng")]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -155.0
-offset_top = -80.0
-offset_right = 155.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="Board" type="Panel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8nep6")
+script = ExtResource("4_3i1dd")
+row_scene = ExtResource("5_yxdht")
 
-[node name="Board" parent="." instance=ExtResource("2_jkwru")]
+[node name="Colors" parent="." instance=ExtResource("2_of7c2")]
+
+[node name="Code" parent="." instance=ExtResource("2_of7c2")]
+theme_override_styles/panel = SubResource("StyleBoxFlat_8mcif")
+
+[node name="CodeMask" type="Panel" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_scicy")
+
+[node name="Label" type="Label" parent="CodeMask"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 40
+text = "CODE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HUD" parent="." instance=ExtResource("6_dcdkn")]
+
+[connection signal="game_over" from="Board" to="." method="_on_board_game_over"]
+[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]

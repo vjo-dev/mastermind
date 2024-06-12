@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://8buvf5kdq1mp"]
+
+[ext_resource type="Script" path="res://peg_library.gd" id="1_3rqj6"]
+[ext_resource type="PackedScene" uid="uid://xn3ys30ssn74" path="res://code_peg.tscn" id="1_478hq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqkw3"]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Library" type="Panel"]
+offset_right = 310.0
+offset_bottom = 60.0
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_pqkw3")
+script = ExtResource("1_3rqj6")
+code_peg_scene = ExtResource("1_478hq")
